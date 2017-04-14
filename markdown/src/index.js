@@ -5,6 +5,8 @@ import './style/css/bootstrap.min.css';
 import './index.css';
 // JS
 import { sampleText } from './sampleText';
+// Marked.js
+import marked from 'marked';
 
 class App extends React.Component {
 
@@ -17,6 +19,11 @@ class App extends React.Component {
     this.setState({ text });
   };
 
+  renderText = (text) => {
+    const renderText = marked(text, {sanitize: true});
+    return { __html: renderText }
+  };
+
   render() {
     return (
       <div className="container">
@@ -27,12 +34,11 @@ class App extends React.Component {
               rows="35"
               value={this.state.text}
               className="form-control"
-              onChange={(e) => this.editText(e)}>
-
+              onChange={(e) => this.editText(e)} >
             </textarea>
           </div>
           <div className="col-sm-6">
-            {this.state.text}
+            <div dangerouslySetInnerHTML={this.renderText(this.state.text)} />
           </div>
         </div>
       </div>
