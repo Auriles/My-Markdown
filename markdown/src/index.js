@@ -14,6 +14,11 @@ class App extends React.Component {
     text: sampleText
   };
 
+
+  componentWillUpdate(nextProps, nextState) {
+    localStorage.setItem('text', nextState.text);
+  }
+
   editText = (event) => {
     const text = event.target.value;
     this.setState({ text });
