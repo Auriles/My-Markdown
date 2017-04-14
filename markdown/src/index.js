@@ -14,6 +14,12 @@ class App extends React.Component {
     text: sampleText
   };
 
+  componentWillMount() {
+    const text = localStorage.getItem('text');
+    if(text) {
+      this.setState({ text });
+    }
+  }
 
   componentWillUpdate(nextProps, nextState) {
     localStorage.setItem('text', nextState.text);
